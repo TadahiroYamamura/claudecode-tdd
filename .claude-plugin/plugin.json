@@ -1,0 +1,9 @@
+{
+  "name": "claudecode-tdd",
+  "version": "1.0.0",
+  "description": "Kent Beck's TDD Red-Green-Refactor workflow for Claude Code",
+  "author": {
+    "name": "Tadahiro Yamamura",
+    "email": "mt.village12@gmail.com"
+  }
+}
