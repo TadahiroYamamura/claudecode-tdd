@@ -89,7 +89,7 @@ The commit will be typed as `refactor:` - structural improvement without behavio
 
 ### Next Step
 
-When you are satisfied with the code quality, start the next TDD cycle with `/tdd:red` to add new behavior.
+When you are satisfied with the code quality, write `refactor` to `.tdd/PHASE`, then start the next TDD cycle with `/tdd:red`.
 
 ---
 

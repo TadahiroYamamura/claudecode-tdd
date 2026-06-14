@@ -6,6 +6,12 @@ description: Start the RED phase - Write a small, focused failing test
 
 You are entering the **RED** phase of Kent Beck's TDD cycle. Your goal is to write ONE small, focused failing test.
 
+### Before Starting
+
+Check `.tdd/PHASE`. If it contains `green`, REFACTOR is incomplete — run `/tdd:refactor` first. Do not write a new test until the previous cycle is fully closed.
+
+After the test is written and confirmed failing, write `red` to `.tdd/PHASE`.
+
 ### Phase Rules
 
 - **NO COMMIT** during RED phase (you are not in a safe state)

@@ -73,6 +73,8 @@ Run `/git:commit` to commit this behavioral change. The commit will be typed as:
 - `fix:` for bug fixes
 - `test:` for test additions
 
+After committing, write `green` to `.tdd/PHASE`.
+
 ### Next Step
 
 After committing, proceed to `/tdd:refactor` to improve code quality while keeping tests green.
