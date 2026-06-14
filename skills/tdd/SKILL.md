@@ -33,3 +33,4 @@ Follow Kent Beck's TDD and Tidy First principles using the three-phase workflow:
 - Express intent through clear naming
 - Keep methods small and focused
 - Run ALL tests after EVERY change
+- **Precise assertions**: exact equality over partial matching; all struct fields over spot-checks

@@ -32,6 +32,45 @@ After the test is written and confirmed failing, write `red` to `.tdd/PHASE`.
 - Missing implementation (expected)
 - NOT syntax errors or typos
 
+**4. Make assertions as precise as possible:**
+
+Assert exactly what you expect — no weaker than necessary.
+
+- **Error messages**: use exact equality, not partial matching
+
+  ```go
+  // Bad: passes even if message changes silently
+  strings.Contains(err.Error(), "not set")
+
+  // Good: pins the exact contract
+  err.Error() == "remote URL not set"
+  ```
+
+- **Structs**: compare all fields, not just some
+
+  ```go
+  // Bad: ignores Age — a bug there would go undetected
+  got := NewPerson(name, age)
+  if got.Name != "Alice" { t.Fatal(...) }
+
+  // Good: no field escapes verification
+  want := Person{Name: "Alice", Age: 30}
+  if got != want { t.Fatalf("got %+v, want %+v", got, want) }
+  // or: if !reflect.DeepEqual(got, want) { ... }
+  ```
+
+- **Exceptions**: partial matching is valid only when the message intentionally includes runtime-generated values (e.g., a filename, port number). In that case, make the intent explicit through naming or structure:
+
+  ```go
+  // Descriptive variable name shows what part is stable
+  wantPrefix := "cannot open file: "
+  if !strings.HasPrefix(err.Error(), wantPrefix) { ... }
+
+  // Or use a regex to anchor the full pattern
+  pattern := regexp.MustCompile(`^remote URL not set: .+$`)
+  if !pattern.MatchString(err.Error()) { ... }
+  ```
+
 ### When to Split Into a New Test
 
 Consider creating a separate test function when:
