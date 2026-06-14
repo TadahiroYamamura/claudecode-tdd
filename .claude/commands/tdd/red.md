@@ -33,6 +33,19 @@ Consider creating a separate test function when:
 - The new assertion requires **different setup** than existing assertions
 - You're unsure which assertion would fail first (tests should have clear failure points)
 
+### Did the Previous GREEN Use Fake It?
+
+If yes, this RED is a **Triangulation** test. Write a test with **different concrete input values** that breaks the constant:
+
+```python
+# Previous: test_add_one_and_one → GREEN returned 2 (fake)
+# Triangulation: different inputs that expose the fake
+def test_add_two_and_three():
+    assert add(2, 3) == 5  # breaks `return 2`, forces real implementation
+```
+
+Triangulation rule: **vary the inputs, not just the assertion**.
+
 ### Checklist Before Proceeding
 
 - [ ] Test has a descriptive name explaining the expected behavior
