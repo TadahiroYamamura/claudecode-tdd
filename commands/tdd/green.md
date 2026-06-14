@@ -12,79 +12,57 @@ You are entering the **GREEN** phase. Your goal is to make the failing test pass
 - Do NOT add unnecessary functionality
 - Ignore code quality temporarily - that is for REFACTOR phase
 
-### Beck's Three Strategies
-
-Choose based on your confidence level:
+### Beck's Strategies
 
 #### 1. Fake It (Till You Make It)
-**Use when**: You are unsure how to implement the real solution
 
 ```python
 # Test: assert add(1, 1) == 2
 def add(a, b):
-    return 2  # Fake it! Just return the expected constant
+    return 2  # return the expected constant
 ```
 
-- Return a constant that makes the test pass
-- Gradually replace constants with variables via Triangulation
+Return a constant that makes the test pass.
 
 #### 2. Obvious Implementation
-**Use when**: The solution is clear and you are confident
 
 ```python
-# Test: assert add(1, 1) == 2
+# Tests: add(1,1)==2 AND add(2,3)==5 already exist
 def add(a, b):
-    return a + b  # Obviously correct, just type it
+    return a + b  # the only implementation that satisfies all tests
 ```
 
-- Type in the real implementation directly
+Write the real implementation when it is uniquely determined.
+
 - **Warning**: If it fails, fall back to Fake It
-
-#### 3. Triangulation
-**Use when**: You faked it and need to generalize
-
-```python
-# First test passed with fake: return 2
-# Add second test to force generalization:
-def test_add_two_and_three():
-    assert add(2, 3) == 5  # This breaks the fake!
-
-# Now must implement real logic
-def add(a, b):
-    return a + b  # Triangulation forced this
-```
 
 ### Strategy Selection Criteria
 
-**Before writing any code, count (even if you feel confident):**
+**Ask: "Could multiple implementations pass this test?"**
 
-1. How many new types (struct/class) will you create?
-2. How many new functions will you create?
-
-→ **If either exceeds 1, use Fake It — regardless of confidence.**
+| Answer | Strategy |
+|--------|----------|
+| Yes | **Fake It** — return a constant |
+| No | **Obvious Implementation** — write the real solution |
 
 **Use Fake It when:**
-- Implementation requires 2+ new types or functions
-- Algorithm is unclear after reading the test
-- Multiple conditionals or branches needed
-- You've already tried Obvious Implementation and it failed
+- A constant or trivial value would pass the test
+- You are unsure which inputs the next test will add
+- Algorithm correctness depends on cases not yet tested
 
 **Use Obvious Implementation when:**
-- At most 1 new type AND at most 1 new function
-- Single expression or statement suffices
-- Pattern matches existing code in codebase
-- Implementation is a direct translation of the test
+- Existing tests already constrain the implementation (you've been triangulating)
+- The rule is universal and self-evident: `return len(s)` for `assert count("abc") == 3`
+- The implementation is a direct, one-to-one translation of the assertion
 
-**Use Triangulation when:**
-- You faked it and need to generalize
-- The abstraction is not yet clear
-- You want to discover the design through tests
+> ⚠️ **After Fake It**: The next RED phase must be a Triangulation test.
+> Add different input values that break the constant and force generalization.
 
 ### Checklist Before Commit
 
 - [ ] Test passes (run all tests to confirm)
 - [ ] Implementation is minimal (no extra features)
-- [ ] You used an appropriate strategy for your confidence level
+- [ ] Strategy chosen correctly: Fake It if multiple implementations could pass, Obvious if uniquely determined
 
 ### Commit Your Progress
 
