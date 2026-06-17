@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(/tmp/tdd-eval-*/**)",
+      "Write(/tmp/tdd-eval-*/**)",
+      "Edit(/tmp/tdd-eval-*/**)",
+      "Bash(ls *)",
+      "Bash(grep *)",
+      "Bash(go build *)",
+      "Bash(go test *)"
+    ]
+  }
+}
