@@ -6,6 +6,10 @@ description: Complete the GREEN phase - Make the test pass with minimal code
 
 You are entering the **GREEN** phase. Your goal is to make the failing test pass with **minimal code**.
 
+### Before Starting
+
+Check `.tdd/PHASE`. If it does not contain `red`, the RED phase is incomplete — run `/tdd:red` first. Do not write implementation until a failing test exists.
+
 ### Phase Rules
 
 - This phase occurs **EXACTLY ONCE** per cycle
@@ -68,12 +72,10 @@ Write the real implementation when it is uniquely determined.
 
 **GREEN = SAFE**. You now have a working checkpoint you can always return to.
 
-Run `/git:commit` to commit this behavioral change. The commit will be typed as:
+Write `green` to `.tdd/PHASE`, then run `/git:commit` to commit this behavioral change. The commit will be typed as:
 - `feat:` for new functionality
 - `fix:` for bug fixes
 - `test:` for test additions
-
-After committing, write `green` to `.tdd/PHASE`.
 
 ### Next Step
 

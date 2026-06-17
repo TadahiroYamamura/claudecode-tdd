@@ -45,7 +45,7 @@ Allowed in this phase:
 1. Identify ONE small improvement
 2. Make the change (keep diff small - see limits below)
 3. Run ALL tests
-4. Tests pass? -> /git:commit with type "refactor:"
+4. Tests pass? -> Write `refactor` to `.tdd/PHASE` -> /git:commit with type "refactor:"
 5. Tests fail? -> Revert immediately and take smaller step
 6. More improvements needed? -> Repeat from step 1
 7. Satisfied? -> Start next TDD cycle with /tdd:red
@@ -89,7 +89,7 @@ The commit will be typed as `refactor:` - structural improvement without behavio
 
 ### Next Step
 
-When you are satisfied with the code quality, write `refactor` to `.tdd/PHASE`, then start the next TDD cycle with `/tdd:red`.
+When you are satisfied with the code quality, start the next TDD cycle with `/tdd:red`.
 
 ---
 
