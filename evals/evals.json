@@ -1,0 +1,49 @@
+{
+  "skill_name": "tdd",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "GoでFizzBuzzをTDDで実装して。`FizzBuzz(n int) string` 関数を作り、1・3・5・15に対する動作をテストすること",
+      "expected_output": "TDDのRed-Green-Refactorサイクルを踏んでFizzBuzzを実装。テストファイルと実装ファイルが分離されており、全テストがパスし、refactor:コミットが存在する",
+      "files": [],
+      "expectations": [
+        "*_test.go ファイルが outputs/ に存在する",
+        "テストファイル以外の実装用 .go ファイルが存在する",
+        "test_output.txt に PASS が含まれ、FAIL が含まれない",
+        "git_log.txt に 'feat:' または 'fix:' プレフィックスのコミットが1つ以上ある",
+        "git_log.txt に 'refactor:' プレフィックスのコミットが1つ以上ある",
+        ".tdd/PHASE の最終値が 'refactor' である"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "TDDを使ってGoでシンプルなスタックを実装して。Push・Pop・IsEmptyメソッドを含めること。空のスタックからPopしたときのエラーハンドリングもテストすること",
+      "expected_output": "TDDのサイクルでスタックを実装。複数の振る舞い（push/pop/isEmpty/空のpop）それぞれに対してテストが存在し、全テストがパスする",
+      "files": [],
+      "expectations": [
+        "*_test.go ファイルが outputs/ に存在する",
+        "テストファイル以外の実装用 .go ファイルが存在する",
+        "test_output.txt に PASS が含まれ、FAIL が含まれない",
+        "git_log.txt に 'feat:' または 'fix:' プレフィックスのコミットが1つ以上ある",
+        "git_log.txt に 'refactor:' プレフィックスのコミットが1つ以上ある",
+        ".tdd/PHASE の最終値が 'refactor' である",
+        "空のスタックからPopした場合のエラーをテストするテスト関数が存在する"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "TDDでGoのCalculatorを実装して。AddとDivideメソッドを含め、ゼロ除算のエラーも正しくテストすること",
+      "expected_output": "TDDのサイクルでCalculatorを実装。Add・Divideの正常系と、ゼロ除算の異常系それぞれにテストが存在し、全テストがパスする",
+      "files": [],
+      "expectations": [
+        "*_test.go ファイルが outputs/ に存在する",
+        "テストファイル以外の実装用 .go ファイルが存在する",
+        "test_output.txt に PASS が含まれ、FAIL が含まれない",
+        "git_log.txt に 'feat:' または 'fix:' プレフィックスのコミットが1つ以上ある",
+        "git_log.txt に 'refactor:' プレフィックスのコミットが1つ以上ある",
+        ".tdd/PHASE の最終値が 'refactor' である",
+        "ゼロ除算のエラーハンドリングをテストするテスト関数が存在する"
+      ]
+    }
+  ]
+}
