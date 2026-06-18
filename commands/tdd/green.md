@@ -72,10 +72,22 @@ Write the real implementation when it is uniquely determined.
 
 **GREEN = SAFE**. You now have a working checkpoint you can always return to.
 
-Write `green` to `.tdd/PHASE`, then run `/git:commit` to commit this behavioral change. The commit will be typed as:
+Run `scripts/tdd-commit.sh` to write PHASE and commit atomically. Pass the message via heredoc for multi-line support:
+
+```bash
+scripts/tdd-commit.sh green "$(cat <<'EOF'
+feat: <summary>
+
+<optional body>
+EOF
+)"
+```
+
+The commit type should be:
 - `feat:` for new functionality
 - `fix:` for bug fixes
-- `test:` for test additions
+
+Do **NOT** write `.tdd/PHASE` manually or run `git commit` directly — the script handles both.
 
 ### Next Step
 

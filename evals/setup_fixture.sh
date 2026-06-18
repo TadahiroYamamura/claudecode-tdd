@@ -23,6 +23,7 @@ go mod init "$MODULE_NAME" > /dev/null
 
 mkdir -p .tdd/snapshots
 echo "none" > .tdd/PHASE
+touch .tdd/active
 printf '.tdd/*\n!.tdd/PHASE\n' > .gitignore
 
 # Stage .tdd/PHASE on every commit so phase transitions appear in git history.
@@ -31,6 +32,10 @@ cat > .git/hooks/pre-commit << 'HOOK'
 #!/usr/bin/env bash
 if [ -f .tdd/PHASE ]; then
   git add .tdd/PHASE
+fi
+if [ -z "$TDD_COMMIT" ]; then
+  echo "Error: Use scripts/tdd-commit.sh instead of git commit directly." >&2
+  exit 1
 fi
 HOOK
 chmod +x .git/hooks/pre-commit
@@ -88,7 +93,12 @@ chmod +x .tdd/watcher.sh
 timeout 3600 .tdd/watcher.sh &
 echo $! > .tdd/watcher.pid
 
-git add go.mod
-git commit -q -m "chore: initialize eval fixture"
+REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+mkdir -p scripts
+cp "$REPO_ROOT/scripts/tdd-commit.sh" scripts/tdd-commit.sh
+chmod +x scripts/tdd-commit.sh
+
+git add go.mod scripts/
+TDD_COMMIT=1 git commit -q -m "chore: initialize eval fixture"
 
 echo "Fixture ready: $TARGET_DIR (watcher PID: $(cat .tdd/watcher.pid))"

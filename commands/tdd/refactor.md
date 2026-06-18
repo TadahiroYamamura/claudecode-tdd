@@ -45,7 +45,7 @@ Allowed in this phase:
 1. Identify ONE small improvement
 2. Make the change (keep diff small - see limits below)
 3. Run ALL tests
-4. Tests pass? -> Write `refactor` to `.tdd/PHASE` -> /git:commit with type "refactor:"
+4. Tests pass? -> Run `scripts/tdd-commit.sh refactor` to save progress
 5. Tests fail? -> Revert immediately and take smaller step
 6. More improvements needed? -> Repeat from step 1
 7. Satisfied? -> Start next TDD cycle with /tdd:red
@@ -77,9 +77,18 @@ Each refactor commit should be small and focused:
 
 ### Commit Each Refactor
 
-After each successful refactoring step, run `/git:commit` to save your progress.
+After each successful refactoring step, commit with:
 
-The commit will be typed as `refactor:` - structural improvement without behavior change.
+```bash
+scripts/tdd-commit.sh refactor "$(cat <<'EOF'
+refactor: <summary>
+
+<optional body>
+EOF
+)"
+```
+
+Do **NOT** write `.tdd/PHASE` manually or run `git commit` directly — the script handles both.
 
 ### Safety Net
 
