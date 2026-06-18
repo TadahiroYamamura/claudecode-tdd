@@ -31,4 +31,9 @@ if [ ! -d ".tdd" ]; then
 fi
 
 echo "$PHASE" > .tdd/PHASE
+
+if [ -z "$MESSAGE" ]; then
+  exit 0
+fi
+
 TDD_COMMIT=1 git commit -m "$MESSAGE"

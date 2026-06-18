@@ -48,7 +48,7 @@ Allowed in this phase:
 4. Tests pass? -> Run `scripts/tdd-commit.sh refactor` to save progress
 5. Tests fail? -> Revert immediately and take smaller step
 6. More improvements needed? -> Repeat from step 1
-7. Satisfied? -> Start next TDD cycle with /tdd:red
+7. No improvements needed? -> Run `scripts/tdd-commit.sh refactor ""` to advance PHASE without committing, then start next cycle with /tdd:red
 ```
 
 ### Refactor Step Size Limits
