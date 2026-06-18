@@ -16,7 +16,7 @@
 
 ---
 
-## P2: REFACTOR 不要時に空コミットが作られる
+## P2: REFACTOR 不要時に空コミットが作られる ✅ 対応済み
 
 **発見方法**: iteration-1/2 の git_log.txt を確認
 
@@ -25,6 +25,8 @@
 何も変更しないコミットは git 履歴を汚染する。改善箇所がなければ次の RED へ進むべき。
 
 **再現**: iteration-2 calculator-go に3件（サイクル1〜3）、iteration-1 fizzbuzz-go/calculator-go にも発生。
+
+**対応**: `scripts/tdd-commit.sh refactor ""` のように空メッセージを渡すと PHASE のみ更新してコミットをスキップする。`refactor.md` のワークフローに「改善不要の場合は空メッセージで PHASE を進める」を明示した。
 
 ---
 

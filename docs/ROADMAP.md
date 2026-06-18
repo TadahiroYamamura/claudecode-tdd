@@ -41,9 +41,9 @@ iteration-3 で `phase_write_order_rate` の改善を確認する。
 
 ### タスク
 
-**P2: 空 REFACTOR コミット抑制**
+**P2: 空 REFACTOR コミット抑制 ✅**
 
-`refactor.md` に「改善点がなければ次の RED へ進む。空コミットを作らない」を明示する。
+`scripts/tdd-commit.sh refactor ""` で PHASE のみ進めコミットをスキップできるようにした。`refactor.md` のワークフローに「改善不要の場合は空メッセージで PHASE を進める」を明示した。
 
 **P3: GREEN フェーズでのテスト追加禁止**
 
