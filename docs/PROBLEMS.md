@@ -1,6 +1,6 @@
 # TDDスキル 既知の問題
 
-## P1: GREEN フェーズで PHASE 書き込みがコミット後になる
+## P1: GREEN フェーズで PHASE 書き込みがコミット後になる ✅ 対応済み
 
 **発見方法**: iteration-2 スナップショットの `cycle-N-green/git_diff.txt` を確認
 
@@ -11,6 +11,8 @@
 **影響**: 「GREEN フェーズで Fake It が使われたか」をスナップショットから検証できない。
 
 **再現**: iteration-2 全3件（fizzbuzz-go / stack-go / calculator-go）で発生。
+
+**対応**: `scripts/tdd-commit.sh <phase> "<message>"` ラッパーを導入。PHASE 書き込みとコミットをアトミックに行い、エージェントが `git commit` を直接叩けないよう pre-commit フックでブロックする。iteration-3 で改善を確認する。
 
 ---
 
@@ -253,8 +255,7 @@ REFACTOR スキップ等の指示逸脱が増えていくことが確認され�
 
 ## 未解決の設計課題
 
-- P1 の根本対策: commit-msg フックで PHASE を自動書き込みする（A案）か、
-  PHASE 不一致時にコミットを拒否する（B案）か未決定。
+- P1 の根本対策: `scripts/tdd-commit.sh` ラッパー方式で対応済み。
 - P6 の対策: `~/.claude/rules/` にパス指定ルールとして記述する。Go なら `paths: "**/*_test.go"` で
   Table-Driven Test 等のイディオムを定義。他言語も `*.spec.ts`、`*_test.py` 等で同様に追加可能。
   ユーザーレベルに置けば全プロジェクトで有効。

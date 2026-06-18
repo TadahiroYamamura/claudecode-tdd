@@ -15,23 +15,23 @@ iteration-2 での Tier 1 指標ベースライン:
 
 ---
 
-## フェーズ 1: インフラ整備（P1 修正）
+## フェーズ 1: インフラ整備（P1 修正）✅
 
 **目標**: `phase_write_order_rate` を改善可能な状態にする
 
-### タスク
+### 対応済み
 
-**P1 の根本修正: 方針未決定**
+**P1 の根本修正: `scripts/tdd-commit.sh` ラッパー方式を採用**
 
-現在エージェントは実装をコミットした後に PHASE を書くため、GREEN/REFACTOR スナップショットに実装差分が残らない。以下の選択肢がある:
+PHASE の書き込みとコミットをアトミックに行うラッパースクリプトを導入した。
+エージェントは `git commit` を直接叩けなくなり、必ず `scripts/tdd-commit.sh <phase> "<message>"` 経由でコミットする。
 
-- **A案**: commit-msg フックがコミットメッセージのプレフィックスから PHASE を推定して自動書き込み
-  - `feat:` → green、`refactor:` → refactor、`test:` → red
-  - エージェントの手順変更が不要
-- **B案**: commit-msg フックがコミット時の PHASE を検証し、不一致を拒否
-  - エージェントが PHASE を正しく書く能力を直接試す
+- `scripts/tdd-commit.sh`: PHASE を書いてから `TDD_COMMIT=1 git commit` を実行
+- `scripts/tdd-start.sh` / `scripts/tdd-end.sh`: pre-commit フックへのガードブロック追記・削除
+- `/tdd:start` / `/tdd:end`: セッション開始・終了のスラッシュコマンド
+- eval フィクスチャ（`setup_fixture.sh`）は `.tdd/active` を常時作成し、スクリプトをコピー
 
-方針を決定し、iteration-3 で `phase_write_order_rate` の改善を確認する。
+iteration-3 で `phase_write_order_rate` の改善を確認する。
 
 ---
 
