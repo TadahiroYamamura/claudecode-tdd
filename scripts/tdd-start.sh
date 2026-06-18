@@ -2,10 +2,7 @@
 # Starts a TDD session: appends the TDD guard block to the pre-commit hook.
 set -euo pipefail
 
-if [ ! -d ".tdd" ]; then
-  echo "Error: .tdd directory not found. Run from the project root." >&2
-  exit 1
-fi
+mkdir -p .tdd
 
 GIT_DIR=$(git rev-parse --git-dir 2>/dev/null) || { echo "Error: not inside a git repository." >&2; exit 1; }
 HOOK="$GIT_DIR/hooks/pre-commit"
